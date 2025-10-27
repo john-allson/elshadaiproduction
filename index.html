@@ -10,16 +10,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .logo-main {
+            display: block;
+            white-space: nowrap;
+        }
         .company-type {
             font-size: 0.6em;
             opacity: 0.8;
-            margin-left: 4px;
-            vertical-align: super;
             font-weight: 400;
+            display: block;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
         }
         @media (max-width: 768px) {
             .company-type {
                 font-size: 0.5em;
+                margin-top: 1px;
             }
         }
     </style>
@@ -29,7 +42,10 @@
     <header class="header">
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">Elshadai<span>Productions</span><span class="company-type">Pvt Ltd</span></a>
+                <a href="#" class="logo">
+                    <div class="logo-main">Elshadai<span>Productions</span></div>
+                    <div class="company-type">Pvt Ltd</div>
+                </a>
                 <div class="nav-toggle" id="navToggle">
                     <span></span>
                     <span></span>
@@ -362,7 +378,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <a href="#" class="logo">Elshadai<span>Productions</span><span class="company-type">Pvt Ltd</span></a>
+                    <a href="#" class="logo">
+                    <div class="logo-main">Elshadai<span>Productions</span></div>
+                    <div class="company-type">Pvt Ltd</div>
+                </a>
                     <p>Where Faith Meets Creativity</p>
                 </div>
                 <div class="footer-links">
