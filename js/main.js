@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
+    let isScrolling = false;
     
     // Add animation class to nav links
     navLinks.forEach((link, index) => {
@@ -136,24 +137,57 @@ document.addEventListener('DOMContentLoaded', function() {
         link.classList.add('animate-fade-in-up');
     });
 
+    // Touch start event to detect actual touch on the toggle button
     if (navToggle) {
-        navToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            document.body.classList.toggle('nav-open');
-        });
+        navToggle.addEventListener('touchstart', function(e) {
+            e.stopPropagation();
+            this.classList.add('touched');
+        }, { passive: true });
+
+        // Click/touch handler for the menu toggle
+        const handleMenuToggle = function(e) {
+            // Only toggle if it's a direct click/touch on the toggle
+            if (e.type === 'click' || this.classList.contains('touched')) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.classList.toggle('nav-open');
+                this.classList.remove('touched');
+            }
+        };
+
+        navToggle.addEventListener('click', handleMenuToggle);
+        navToggle.addEventListener('touchend', handleMenuToggle);
     }
 
-    // Close mobile menu when clicking on a nav link
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenu.classList.contains('active')) {
-                navToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.classList.remove('nav-open');
-            }
-        });
+    // Close mobile menu when clicking on a nav link or outside
+    document.addEventListener('click', function(e) {
+        if (navMenu.classList.contains('active') && !e.target.closest('.nav-menu') && !e.target.closest('.nav-toggle')) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.classList.remove('nav-open');
+        }
     });
+
+    // Close menu when scrolling on mobile
+    let scrollTimer;
+    window.addEventListener('scroll', function() {
+        if (window.innerWidth <= 992) { // Only for mobile/tablet view
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.classList.remove('nav-open');
+            
+            // Clear any existing timer
+            clearTimeout(scrollTimer);
+            
+            // Prevent menu from reopening immediately after scroll
+            isScrolling = true;
+            scrollTimer = setTimeout(function() {
+                isScrolling = false;
+            }, 100);
+        }
+    }, { passive: true });
 
     // Header scroll effect
     const header = document.querySelector('.header');
