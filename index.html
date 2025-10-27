@@ -9,13 +9,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .company-type {
+            font-size: 0.6em;
+            opacity: 0.8;
+            margin-left: 4px;
+            vertical-align: super;
+            font-weight: 400;
+        }
+        @media (max-width: 768px) {
+            .company-type {
+                font-size: 0.5em;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
     <header class="header">
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">Elshadai<span>Productions</span></a>
+                <a href="#" class="logo">Elshadai<span>Productions</span><span class="company-type">Pvt Ltd</span></a>
                 <div class="nav-toggle" id="navToggle">
                     <span></span>
                     <span></span>
@@ -348,7 +362,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <a href="#" class="logo">Elshadai<span>Productions</span></a>
+                    <a href="#" class="logo">Elshadai<span>Productions</span><span class="company-type">Pvt Ltd</span></a>
                     <p>Where Faith Meets Creativity</p>
                 </div>
                 <div class="footer-links">
